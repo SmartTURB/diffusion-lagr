@@ -66,7 +66,9 @@ The data file `Lagr_u3c_diffusion.h5` mentioned above is used for training the `
 
 ## Training
 
-To train your model, you'll first need to determine certain hyperparameters. We can categorize these hyperparameters into three groups: model architecture, diffusion process, and training flags. Detailed information about these can be found in the [parent repository](https://github.com/openai/improved-diffusion). The run flags for the two models featured in our paper are as follows (please refer to Fig.2 in [the paper](https://arxiv.org/abs/2307.08529)):
+To train your model, you'll first need to determine certain hyperparameters. We can categorize these hyperparameters into three groups: model architecture, diffusion process, and training flags. Detailed information about these can be found in the [parent repository](https://github.com/openai/improved-diffusion).
+
+The run flags for the two models featured in our paper are as follows (please refer to Fig.2 in [the paper](https://arxiv.org/abs/2307.08529)):
 
 For the `DM-1c` model, use the following flags:
 
@@ -94,38 +96,34 @@ mpiexec -n $NUM_GPUS python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFF
 
 The training process is distributed, and for our model, we set `$NUM_GPUS` to 4. Note that the `--batch_size` flag represents the batch size on each GPU, so the real batch size is `$NUM_GPUS * batch_size = 256`, as reported in the paper (Fig.2).
 
+The log files and model checkpoints will be saved to a logging directory specified by the `OPENAI_LOGDIR` environment variable. If this variable is not set, a temporary directory in `/tmp` will be created and used instead.
+
 ### Demo
 
-To assist with testing the software installation and understanding the hyperparameters mentioned above, you can use the smaller dataset `datasets/Lag_u1c_diffusion-demo.h5`, which has a shape of (256, 2000, 3). Note that you do not need to install MPI and parallel h5py for this demo. To run the demo, use the following command:
+To assist with testing the software installation and understanding the hyperparameters mentioned above, you can use the smaller dataset `datasets/Lag_u1c_diffusion-demo.h5`, which has a shape of (256, 2000, 3). Note that you do not need to install MPI and parallel h5py for this demo.
+
+To run the demo, use the following command:
+
 ```sh
 python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
 
-# dsadasda
-and sampling:
+## Sampling:
+
+The training script from the previous section stores checkpoints as `.pt` files within the designated logging directory. These checkpoint files will follow naming patterns such as `ema_0.9999_200000.pt` or `model200000.pt`. For improved sampling results, it's advised to sample from the Exponential Moving Average (EMA) models.
+
+Before sampling, set `SAMPLE_FLAGS` to specify the number of samples `--num_samples`, batch size `--batch_size`, and the path to the model `--model_path`. For example:
 
 ```sh
-SAMPLE_FLAGS="--num_samples 179200 --batch_size 64 --model_path /mnt/petaStor/li/Job/diffusion-lagr/lagr_u1c-IS2000-NC128-NRB3-DS800-NStanh6_1-LR1e-4-BS256-train/ema_0.9999_250000.pt"
-MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 1 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
-DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
-mpiexec -n 4 python ../scripts/turb_sample.py $SAMPLE_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS
+SAMPLE_FLAGS="--num_samples 179200 --batch_size 64 --model_path ema_0.9999_250000.pt"
 ```
 
-For DM-3c training:
+Then, run the following command:
 
 ```sh
-DATA_FLAGS="--dataset_path /mnt/petaStor/li/Job/diffusion-lagr/datasets/Lagr_u3c_diffusion.h5 --dataset_name train"
-MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 3 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
-DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
-TRAIN_FLAGS="--lr 1e-4 --batch_size 64"
-mpiexec -n 4 python ../scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
+python scripts/turb_sample.py $SAMPLE_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS
 ```
 
-and sampling:
+Just like for training, you can use multiple GPUs for sampling. Please note that the `$MODEL_FLAGS` and `$DIFFUSION_FLAGS` should be the same as those used in training.
 
-```sh
-SAMPLE_FLAGS="--num_samples 179200 --batch_size 64 --model_path /mnt/petaStor/li/Job/diffusion-lagr/lagr_u3c-IS2000-NC128-NRB3-DS800-NStanh6_1-LR1e-4-BS256-train/ema_0.9999_400000.pt"
-MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 3 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
-DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
-mpiexec -n 4 python ../scripts/turb_sample.py $SAMPLE_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS
-```
+The links to the checkpoints used for `DM-1c` and `DM-3c` in the paper are as follows:
