@@ -70,20 +70,31 @@ To train your model, you'll first need to determine certain hyperparameters. We 
 
 The run flags for the two models featured in our paper are as follows (please refer to Fig.2 in [the paper](https://arxiv.org/abs/2307.08529)):
 
-# Training models and Sampling
-
-Training diffusion modelss and Sampling are described in the [parent repository](https://github.com/openai/improved-diffusion).
-
-For DM-1c training:
+For the `DM-1c` model, use the following flags:
 
 ```sh
-DATA_FLAGS="--dataset_path /mnt/petaStor/li/Job/diffusion-lagr/datasets/Lagr_u1c_diffusion.h5 --dataset_name train"
+DATA_FLAGS="--dataset_path ../datasets/Lagr_u1c_diffusion.h5 --dataset_name train"
 MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 1 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
 DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
 TRAIN_FLAGS="--lr 1e-4 --batch_size 64"
+```
+
+For the `DM-3c` model, you only need to modify `--dataset_path` to `../datasets/Lagr_u3c_diffusion.h5` and `--in_channels` to `3`:
+
+```sh
+DATA_FLAGS="--dataset_path ../datasets/Lagr_u3c_diffusion.h5 --dataset_name train"
+MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 3 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
+DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
+TRAIN_FLAGS="--lr 1e-4 --batch_size 64"
+```
+
+After defining your hyperparameters, you can initiate an experiment using the following command:
+
+```sh
 mpiexec -n 4 python ../scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
 
+# dsadasda
 and sampling:
 
 ```sh
