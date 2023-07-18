@@ -19,15 +19,20 @@ Our software was developed and tested on a system with the following specificati
 
 ## Installation
 
-We recommend using a Conda environment to manage dependencies. The code relies on the MPI library and parallel h5py ([link here](#)).
-
-Clone this repository and navigate to it in your terminal. Then run:
+We recommend using a Conda environment to manage dependencies. The code relies on the MPI library and [parallel h5py](https://docs.h5py.org/en/stable/mpi.html). After setting up your environment, clone this repository and navigate to it in your terminal. Then run:
 
 ```
 pip install -e .
 ```
 
 This should install the `guided_diffusion` python package that the scripts depend on.
+
+### Troubleshooting Installation
+
+During the installation process, you might encounter a couple of known issues. Here are some tips to help you resolve them:
+
+1. **Parallel h5py Installation**: The installation of parallel h5py can be problematic. To bypass this issue, you can modify the code at [this line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75).
+2. **PyTorch Installation**: In our experience, sometimes it's necessary to reinstall PyTorch depending on your system environment. You can download and install PyTorch from their [official website](https://pytorch.org/).
 
 ## Preparing Data
 
