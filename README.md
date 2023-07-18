@@ -139,4 +139,4 @@ u3c = (np.load('samples_179200x2000x3.npz')['arr_0']+1)*(rx1-rx0)/2 + rx0
 
 Just like for training, you can use multiple GPUs for sampling. Please note that the `$MODEL_FLAGS` and `$DIFFUSION_FLAGS` should be the same as those used in training.
 
-The links to the checkpoints used for `DM-1c` and `DM-3c` in the paper are as follows:
+The checkpoints utilized for `DM-1c` and `DM-3c` in the paper can be found here.
