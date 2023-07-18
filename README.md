@@ -1,8 +1,41 @@
 # diffusion-lagr
 
-This is the codebase for [Synthetic Lagrangian Turbulence by Generative Diffusion Models](TODO)
+This is the codebase for [Synthetic Lagrangian Turbulence by Generative Diffusion Models](https://arxiv.org/abs/2307.08529).
 
-This repository is based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion), with modifications specifically tailored to adapt the Lagrangian turbulence data in the Smart-TURB portal http://smart-turb.roma2.infn.it, under the TURB-Lagr repository.
+This repository is based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion), with modifications specifically tailored to adapt the Lagrangian turbulence data in the Smart-TURB portal http://smart-turb.roma2.infn.it, under the [TURB-Lagr](https://smart-turb.roma2.infn.it/init/routes/#/logging/view_dataset/2/tabmeta) dataset.
+
+# Usage
+
+## Development Environment
+
+Our software was developed and tested on a system with the following specifications:
+
+- **Operating System**: Ubuntu 20.04.4 LTS
+- **Python Version**: 3.7.16
+- **PyTorch Version**: 1.13.1
+- **MPI Implementation**: OpenRTE 4.0.2
+- **CUDA Version**: 11.5
+- **GPU Model**: NVIDIA A100
+
+## Installation
+
+We recommend using a Conda environment to manage dependencies. The code relies on the MPI library and parallel h5py ([link here](#)).
+
+Clone this repository and navigate to it in your terminal. Then run:
+
+```
+pip install -e .
+```
+
+This should install the `guided_diffusion` python package that the scripts depend on.
+
+## Preparing Data
+
+The training code reads images from a directory of image files. In the [datasets](datasets) folder, we have provided instructions/scripts for preparing these directories for ImageNet, LSUN bedrooms, and CIFAR-10.
+
+For creating your own dataset, simply dump all of your images into a directory with ".jpg", ".jpeg", or ".png" extensions. If you wish to train a class-conditional model, name the files like "mylabel1_XXX.jpg", "mylabel2_YYY.jpg", etc., so that the data loader knows that "mylabel1" and "mylabel2" are the labels. Subdirectories will automatically be enumerated as well, so the images can be organized into a recursive structure (although the directory names will be ignored, and the underscore prefixes are used as names).
+
+The images will automatically be scaled and center-cropped by the data-loading pipeline. Simply pass `--data_dir path/to/images` to the training script, and it will take care of the rest.
 
 # Training models and Sampling
 
