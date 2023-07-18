@@ -19,7 +19,7 @@ Our software was developed and tested on a system with the following specificati
 
 ## Installation
 
-We recommend using a Conda environment to manage dependencies. The code relies on the MPI library and [parallel h5py](https://docs.h5py.org/en/stable/mpi.html). Note, however, that the use of MPI is not mandatory for all functionalities. See details in [Training](#Training) and [Sampling](#Sampling) for more information. After setting up your environment, clone this repository and navigate to it in your terminal. Then run:
+We recommend using a Conda environment to manage dependencies. The code relies on the MPI library and [parallel h5py](https://docs.h5py.org/en/stable/mpi.html). Note, however, that the use of MPI is not mandatory for all functionalities. See details in [Training](#train) and [Sampling](#sample) for more information. After setting up your environment, clone this repository and navigate to it in your terminal. Then run:
 
 ```
 pip install -e .
@@ -104,7 +104,7 @@ To assist with testing the software installation and understanding the hyperpara
 
 To run the demo, use the following command:
 
-<a id="Training"></a>
+<a id="train"></a>
 ```sh
 python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
@@ -121,7 +121,7 @@ SAMPLE_FLAGS="--num_samples 179200 --batch_size 64 --model_path ema_0.9999_25000
 
 Then, run the following command:
 
-<a id="Sampling"></a>
+<a id="sample"></a>
 ```sh
 python scripts/turb_sample.py $SAMPLE_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS
 ```
