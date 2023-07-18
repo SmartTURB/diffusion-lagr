@@ -52,7 +52,7 @@ Here is an example of how you can read the data:
 import h5py
 import numpy as np
 
-with h5py.File('Lagr_u3c_diffusion.h5', 'r') as h5f:
+with h5py.File('datasets/Lagr_u3c_diffusion.h5', 'r') as h5f:
     rx0 = np.array(h5f.get('min'))
     rx1 = np.array(h5f.get('max'))
     u3c = np.array(h5f.get('train'))
@@ -122,6 +122,19 @@ Then, run the following command:
 
 ```sh
 python scripts/turb_sample.py $SAMPLE_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS
+```
+
+After sampling with the above command, it will generate a file named `samples_179200x2000x3.npz` (for `DM-3c` as an example). You can use the following code to read and retrieve the generated velocities:
+
+```python
+import h5py
+import numpy as np
+
+with h5py.File('datasets/Lagr_u3c_diffusion.h5', 'r') as h5f:
+    rx0 = np.array(h5f.get('min'))
+    rx1 = np.array(h5f.get('max'))
+
+u3c = (np.load('samples_179200x2000x3.npz')['arr_0']+1)*(rx1-rx0)/2 + rx0
 ```
 
 Just like for training, you can use multiple GPUs for sampling. Please note that the `$MODEL_FLAGS` and `$DIFFUSION_FLAGS` should be the same as those used in training.
