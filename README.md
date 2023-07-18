@@ -100,7 +100,7 @@ The log files and model checkpoints will be saved to a logging directory specifi
 
 ### Demo
 
-To assist with testing the software installation and understanding the hyperparameters mentioned above, you can use the smaller dataset `datasets/Lag_u1c_diffusion-demo.h5`, which has a shape of (256, 2000, 3). Note that you do not need to install MPI and parallel h5py (modify [this line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75)) for this demo.
+To assist with testing the software installation and understanding the hyperparameters mentioned above, you can use the smaller dataset `datasets/Lag_u1c_diffusion-demo.h5`, which has a shape of (256, 2000, 3). Note that for this demo, MPI installation is not required and you need to replace [this line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75) with the [next one](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76) to avoid using parallel h5py.
 
 To run the demo, use the following command:
 
