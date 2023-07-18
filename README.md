@@ -36,6 +36,33 @@ During the installation process, you might encounter a couple of known issues. H
 
 ## Preparing Data
 
+The data needed for this project can be obtained from the Smart-TURB portal. Follow these steps to download the data:
+
+1. Visit the [Smart-TURB portal](http://smart-turb.roma2.infn.it).
+2. Navigate to `TURB-Lagr` under the `Datasets` section.
+3. Click on `Files` -> `data` -> `Lagr_u3c_diffusion.h5`.
+
+Alternatively, you can directly download the data file from this [link](https://smart-turb.roma2.infn.it/init/files/api_file_download/1/___FOLDERSEPARATOR___scratch___FOLDERSEPARATOR___smartturb___FOLDERSEPARATOR___tov___FOLDERSEPARATOR___turb-lagr___FOLDERSEPARATOR___data___FOLDERSEPARATOR___Lagr_u3c_diffusion___POINT___h5/15728642096).
+
+### Data Details and Example Usage
+
+Here is an example of how you can read the data:
+
+```python
+import h5py
+import numpy as np
+
+with h5py.File('Lagr_u3c_diffusion.h5', 'r') as h5f:
+    rx0 = np.array(h5f.get('min'))
+    rx1 = np.array(h5f.get('max'))
+    u3c = np.array(h5f.get('train'))
+
+velocities = (u3c+1)*(rx1-rx0)/2 + rx0
+```
+
+The `u3c` variable is a 3D array with the shape `(327680, 2000, 3)`, representing 327,680 trajectories, each of size 2000, for 3 velocity components. Each component is normalized to the range `[-1, 1]` using the min-max method. The `rx0` and `rx1` variables store the minimum and maximum values for each of the 3 components, respectively. The last line of the code sample retrieves the original velocities from the normalized data.
+
+
 The training code reads images from a directory of image files. In the [datasets](datasets) folder, we have provided instructions/scripts for preparing these directories for ImageNet, LSUN bedrooms, and CIFAR-10.
 
 For creating your own dataset, simply dump all of your images into a directory with ".jpg", ".jpeg", or ".png" extensions. If you wish to train a class-conditional model, name the files like "mylabel1_XXX.jpg", "mylabel2_YYY.jpg", etc., so that the data loader knows that "mylabel1" and "mylabel2" are the labels. Subdirectories will automatically be enumerated as well, so the images can be organized into a recursive structure (although the directory names will be ignored, and the underscore prefixes are used as names).
