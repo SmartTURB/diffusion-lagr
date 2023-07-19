@@ -110,7 +110,7 @@ To run the demo, use the following command:
 python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
 
-Remember, for this demo, you can simplify the run by using the serial version of h5py as described in the [Parallel h5py Installation](#h5py-installation).
+Remember, for this demo, you can simplify the run by using the serial version of h5py as described in [Parallel h5py Installation](#h5py-installation).
 
 ## Sampling:
 
