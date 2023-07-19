@@ -110,7 +110,7 @@ To run the demo, use the following command:
 python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
 
-The usage of parallel h5py can be avoided in this demo, simply by commenting [this line of code](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75) and uncommenting [the following one](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76).
+Remember, for this demo, you can simplify the run by using the serial version of h5py as described in the [troubleshooting installation section](#troubleshooting-installation).
 
 ## Sampling:
 
