@@ -32,6 +32,7 @@ def load_data(
     size = comm.Get_size()
 
     with h5py.File(dataset_path, 'r', driver='mpio', comm=MPI.COMM_SELF) as f:
+    #with h5py.File(dataset_path, 'r') as f:  # replace the above line with this line for serial h5py
         len_dataset = f[dataset_name].len()
 
     chunk_size = len_dataset // size
@@ -73,7 +74,7 @@ class TurbDataset(Dataset):
         idx += self.start_idx
 
         with h5py.File(self.dataset_path, 'r', driver='mpio', comm=MPI.COMM_SELF) as f:
-        #with h5py.File(self.dataset_path, 'r') as f:  # replace the above line with this for demo
+        #with h5py.File(self.dataset_path, 'r') as f:  # replace the above line with this line for serial h5py
             data = f[self.dataset_name][idx].astype(np.float32)
             data = np.moveaxis(data, -1, 0)
 
