@@ -31,7 +31,7 @@ This should install the `guided_diffusion` python package that the scripts depen
 
 During the installation process, you might encounter a couple of known issues. Here are some tips to help you resolve them:
 
-1. **Parallel h5py Installation**: The installation of parallel h5py can be problematic. To bypass this issue, you can modify the code at [this line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75).
+1. **Parallel h5py Installation**: The installation of parallel h5py can be problematic. To bypass this issue, you can comment the code at [this line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75) and uncomment the [line below](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76).
 2. **PyTorch Installation**: In our experience, sometimes it's necessary to reinstall PyTorch depending on your system environment. You can download and install PyTorch from their [official website](https://pytorch.org/).
 
 ## Preparing Data
