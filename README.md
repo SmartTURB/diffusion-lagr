@@ -114,7 +114,7 @@ The usage of parallel h5py can be avoided in this demo, simply by replacing [thi
 
 ## Sampling:
 
-<img width="374" height="179" src="resources/Sampling">
+<img width="374" height="179" src="resources/Sampling.png">
 
 The training script from the previous section stores checkpoints as `.pt` files within the designated logging directory. These checkpoint files will follow naming patterns such as `ema_0.9999_200000.pt` or `model200000.pt`. For improved sampling results, it's advised to sample from the Exponential Moving Average (EMA) models.
 
