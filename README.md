@@ -31,7 +31,7 @@ This should install the `guided_diffusion` python package that the scripts depen
 
 During the installation process, you might encounter a couple of known issues. Here are some tips to help you resolve them:
 
-1. **Parallel h5py Installation**: Setting up parallel h5py can sometimes pose challenges. As a workaround to this problem, consider commenting out the specific line of code [here](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75) and subsequently uncommenting [the following line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76).
+1. **Parallel h5py Installation**: Setting up parallel h5py can sometimes pose challenges. As a workaround, you can install the serial version of h5py, comment out the specific line of code [here](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75), and uncomment [the following line](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76).
 2. **PyTorch Installation**: In our experience, sometimes it's necessary to reinstall PyTorch depending on your system environment. You can download and install PyTorch from their [official website](https://pytorch.org/).
 
 ## Preparing Data
@@ -40,9 +40,9 @@ The data needed for this project can be obtained from the Smart-TURB portal. Fol
 
 1. Visit the [Smart-TURB portal](http://smart-turb.roma2.infn.it).
 2. Navigate to `TURB-Lagr` under the `Datasets` section.
-3. Click on `Files` -> `data` -> `Lagr_u3c_diffusion.h5`.
+3. Click on `Files` -> `data` -> `Lagr_u3c_diffusion.h5`,
 
-The data file can also be directly downloaded from this [link](https://smart-turb.roma2.infn.it/init/files/api_file_download/1/___FOLDERSEPARATOR___scratch___FOLDERSEPARATOR___smartturb___FOLDERSEPARATOR___tov___FOLDERSEPARATOR___turb-lagr___FOLDERSEPARATOR___data___FOLDERSEPARATOR___Lagr_u3c_diffusion___POINT___h5/15728642096).
+which can also be accessed directly by clicking on this [link](https://smart-turb.roma2.infn.it/init/files/api_file_download/1/___FOLDERSEPARATOR___scratch___FOLDERSEPARATOR___smartturb___FOLDERSEPARATOR___tov___FOLDERSEPARATOR___turb-lagr___FOLDERSEPARATOR___data___FOLDERSEPARATOR___Lagr_u3c_diffusion___POINT___h5/15728642096).
 
 ### Data Details and Example Usage
 
