@@ -42,7 +42,7 @@ The data needed for this project can be obtained from the Smart-TURB portal. Fol
 2. Navigate to `TURB-Lagr` under the `Datasets` section.
 3. Click on `Files` -> `data` -> `Lagr_u3c_diffusion.h5`.
 
-Alternatively, you can directly download the data file from this [link](https://smart-turb.roma2.infn.it/init/files/api_file_download/1/___FOLDERSEPARATOR___scratch___FOLDERSEPARATOR___smartturb___FOLDERSEPARATOR___tov___FOLDERSEPARATOR___turb-lagr___FOLDERSEPARATOR___data___FOLDERSEPARATOR___Lagr_u3c_diffusion___POINT___h5/15728642096).
+The data file can also be downloaded directly from this [link](https://smart-turb.roma2.infn.it/init/files/api_file_download/1/___FOLDERSEPARATOR___scratch___FOLDERSEPARATOR___smartturb___FOLDERSEPARATOR___tov___FOLDERSEPARATOR___turb-lagr___FOLDERSEPARATOR___data___FOLDERSEPARATOR___Lagr_u3c_diffusion___POINT___h5/15728642096).
 
 ### Data Details and Example Usage
 
