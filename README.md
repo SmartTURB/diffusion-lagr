@@ -66,6 +66,10 @@ The data file `Lagr_u3c_diffusion.h5` mentioned above is used for training the `
 
 ## Training
 
+<p align="center">
+  <img width="373" height="197" src="resources/Training.png">
+</p>
+
 To train your model, you'll first need to determine certain hyperparameters. We can categorize these hyperparameters into three groups: model architecture, diffusion process, and training flags. Detailed information about these can be found in the [parent repository](https://github.com/openai/improved-diffusion).
 
 The run flags for the two models featured in our paper are as follows (please refer to Fig.2 in [the paper](https://arxiv.org/abs/2307.08529)):
@@ -111,6 +115,8 @@ python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FL
 The usage of parallel h5py can be avoided in this demo, simply by replacing [this line of code](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L75) with [the following one](https://github.com/SmartTURB/diffusion-lagr/blob/master/guided_diffusion/turb_datasets.py#L76).
 
 ## Sampling:
+
+![Sampling](resources/Sampling.png)
 
 The training script from the previous section stores checkpoints as `.pt` files within the designated logging directory. These checkpoint files will follow naming patterns such as `ema_0.9999_200000.pt` or `model200000.pt`. For improved sampling results, it's advised to sample from the Exponential Moving Average (EMA) models.
 
