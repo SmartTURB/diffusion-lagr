@@ -102,11 +102,31 @@ The log files and model checkpoints will be saved to a logging directory specifi
 
 ### Demo
 
-To assist with testing the software installation and understanding the hyperparameters mentioned above, you can use the smaller dataset `datasets/Lag_u1c_diffusion-demo.h5`, which has a shape of (256, 2000, 3).
+To assist with testing the software installation and understanding the hyperparameters mentioned above, we have provided two smaller datasets: `datasets/Lag_u1c_diffusion-demo.h5` and `datasets/Lag_u3c_diffusion-demo.h5`. The `train` dataset within these files has shapes of (768, 2000, 1) and (256, 2000, 3), respectively.
 
-To run the demo, use the following command:
+To run the demo, use the same flags as for the `DM-1c` and `DM-3c` models above, ensuring that you modify the `--dataset_path` flag to the appropriate demo dataset.
+
+For the `DM-1c` model:
 
 ```sh
+# Set the flags
+DATA_FLAGS="--dataset_path datasets/Lagr_u1c_diffusion-demo.h5 --dataset_name train"
+MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 1 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
+DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
+TRAIN_FLAGS="--lr 1e-4 --batch_size 64"
+# Training command
+python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
+```
+
+For the `DM-3c` model:
+
+```sh
+# Set the flags
+DATA_FLAGS="--dataset_path datasets/Lagr_u3c_diffusion-demo.h5 --dataset_name train"
+MODEL_FLAGS="--dims 1 --image_size 2000 --in_channels 3 --num_channels 128 --num_res_blocks 3 --attention_resolutions 250,125 --channel_mult 1,1,2,3,4"
+DIFFUSION_FLAGS="--diffusion_steps 800 --noise_schedule tanh6,1"
+TRAIN_FLAGS="--lr 1e-4 --batch_size 64"
+# Training command
 python scripts/turb_train.py $DATA_FLAGS $MODEL_FLAGS $DIFFUSION_FLAGS $TRAIN_FLAGS
 ```
 
