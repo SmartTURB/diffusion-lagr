@@ -1,5 +1,5 @@
 """
-Train a diffusion model on 2D snapshots of rotating turbulent flows.
+Train a diffusion model on Lagrangian trajectories in 3d turbulence.
 """
 
 import argparse
