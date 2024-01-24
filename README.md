@@ -1,5 +1,7 @@
 # diffusion-lagr
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10563386.svg)](https://doi.org/10.5281/zenodo.10563386)
+
 This is the codebase for [Synthetic Lagrangian Turbulence by Generative Diffusion Models](https://arxiv.org/abs/2307.08529).
 
 This repository is based on [openai/guided-diffusion](https://github.com/openai/guided-diffusion), with modifications specifically tailored to adapt the Lagrangian turbulence data in the Smart-TURB portal http://smart-turb.roma2.infn.it, under the [TURB-Lagr](https://smart-turb.roma2.infn.it/init/routes/#/logging/view_dataset/2/tabmeta) dataset.
