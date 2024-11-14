@@ -60,10 +60,10 @@ def main():
                 low=0, high=NUM_CLASSES, size=(args.batch_size,), device=dist_util.dev()
             )
             model_kwargs["y"] = classes
-        # sample_fn = (
-        #     diffusion.p_sample_loop if not args.use_ddim else diffusion.ddim_sample_loop
-        # )
-        sample_fn = diffusion.p_sample_loop_history
+        sample_fn = (
+            diffusion.p_sample_loop if not args.use_ddim else diffusion.ddim_sample_loop
+        )
+        #sample_fn = diffusion.p_sample_loop_history
         sample = sample_fn(
             model,
             (args.batch_size, args.in_channels, args.image_size),
@@ -71,10 +71,10 @@ def main():
             clip_denoised=args.clip_denoised,
             model_kwargs=model_kwargs,
         )
-        #sample = sample.clamp(-1, 1)
-        sample[:, -1] = sample[:, -1].clamp(-1, 1)
-        #sample = sample.permute(0, 2, 1)
-        sample = sample.permute(0, 1, 3, 2)
+        sample = sample.clamp(-1, 1)
+        #sample[:, -1] = sample[:, -1].clamp(-1, 1)
+        sample = sample.permute(0, 2, 1)
+        #sample = sample.permute(0, 1, 3, 2)
         sample = sample.contiguous()
 
         gathered_samples = [th.zeros_like(sample) for _ in range(dist.get_world_size())]
